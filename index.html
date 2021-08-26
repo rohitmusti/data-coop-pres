@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Tech Talk: Tree Equity Score</title>
+
+		<meta name="description" content="The recipe of how we created Tree Equity Score">
+		<meta name="author" content="Rohit Musti">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/white.css" id="theme">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<a href="https://treeequityscore.org">
+						<img src="./assets/TES-logo.svg" alt="tree equity score logo" style="height: 180px; margin: 0 auto 4rem auto; background: transparent;" class="demo-logo">
+					</a>
+					<h3>The Tree Equity Score</h3>
+					<p>
+						<small>Presented by <a href="http://rohitmusti.github.io/">Rohit Musti (he/him)</a> </a></p></small>
+					</p>
+				</section>
+
+				<!-- Example of nested vertical slides -->
+				<section>
+					<section>
+						<h3>Not everyone has access to trees</h3>
+							<img class="r-frame" style="background: rgba(255,255,255,0.1);" width="640" height="400" data-src="https://links.imagerelay.com/cdn/3910/ql/c4bda6328a8b4214acde393e0cbc1bee/Detroit-Google-Map-Images_AF_Winter20--1-.jpg" alt="Down arrow">
+					</section>
+					<section>
+						<h3>Areas with few trees often turn into heat islands</h3>
+							<img class="r-frame" style="background: rgba(255,255,255,0.1);" width="640" height="400" data-src="https://links.imagerelay.com/cdn/3910/ql/9a9fcfed36e84b1487ba952b73cf7e04/shutterstock_144222931.jpg" alt="Down arrow">
+					</section>
+                    <section>
+                        <h3>There are a lot of other benefits too!</h3>
+                            <img class="r-frame" style="background: rgba(255,255,255,0.1);" width="640" height="400" data-src="https://links.imagerelay.com/cdn/3910/ql/04a19ec547de42d084b5165c8b183998/infographic-tree-equity-urban-forestry-city-trees-american--1-.png" alt="Down arrow">
+					</section>
+					<section>
+						<h3>Trees are not distributed equally</h3>
+							<img class="r-frame" style="background: rgba(255,255,255,0.1);" width="640" height="450" data-src="./assets/diffpocvstc.png" alt="Down arrow">
+					</section>
+					<section>
+						<h4>An Urban Forestry Evolution</h4>
+							<img class="r-frame" style="background: rgba(255,255,255,0.1);" width="400" height="550" data-src="./assets/tree_planting_meme.jpg" alt="Down arrow">
+					</section>
+				</section>
+
+				<section>
+				<section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
+					<h2>Priority Index</h2>
+					<p>We started with these raw equity indicators</p>
+					<div class="r-hstack justify-center">
+						<div data-id="box1" style="background: #999; width: 75px; height: 75px; margin: 10px; border-radius: 5px; font-size: small;"> <div style="padding-top: 25%">Age</div></div>
+						<div data-id="box3" style="background: #999; width: 75px; height: 75px; margin: 10px; border-radius: 5px; font-size: small;"> <div style="padding-top: 25%">People of Color</div></div>
+						<div data-id="box4" style="background: #999; width: 75px; height: 75px; margin: 10px; border-radius: 5px; font-size: small;"> <div style="padding-top: 25%">People in Poverty</div></div>
+						<div data-id="box6" style="background: #999; width: 75px; height: 75px; margin: 10px; border-radius: 5px; font-size: small;"> <div style="padding-top: 25%">Employment</div></div>
+						<div data-id="box7" style="background: #999; width: 75px; height: 75px; margin: 10px; border-radius: 5px; font-size: small;"> <div style="padding-top: 25%">Population Density</div></div>
+						<div data-id="box2" style="background: #999; width: 75px; height: 75px; margin: 10px; border-radius: 5px; font-size: small;"> <div style="padding-top: 25%">Health</div></div>
+						<div data-id="box5" style="background: #999; width: 75px; height: 75px; margin: 10px; border-radius: 5px; font-size: small;"> <div style="padding-top: 25%">Heat Vulnerability</div></div>
+					</div>
+				</section>
+				<section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
+					<div class="r-hstack justify-center">
+						<div data-id="box1" data-auto-animate-delay="0" style=" background: violet; width: 150px; height: 100px; margin: 10px; border-radius: 200px; font-size: small;"> <div style="padding-top: 25%">Age</div></div>
+						<div data-id="box3" data-auto-animate-delay="0.2" style="background: violet; width: 150px; height: 100px; margin: 10px; border-radius: 200px; font-size: small;"> <div style="padding-top: 25%">People of Color</div></div>
+						<div data-id="box4" data-auto-animate-delay="0.3" style="background: violet; width: 150px; height: 100px; margin: 10px; border-radius: 200px; font-size: small;"> <div style="padding-top: 25%">People in Poverty</div></div>
+						<div data-id="box6" data-auto-animate-delay="0.5" style="background: violet; width: 150px; height: 100px; margin: 10px; border-radius: 200px; font-size: small;"> <div style="padding-top: 25%">Employment</div></div>
+						<div data-id="box7" data-auto-animate-delay="0.5" style="background: violet; width: 150px; height: 100px; margin: 10px; border-radius: 200px; font-size: small;"> <div style="padding-top: 25%">Population Density</div></div>
+						<div data-id="box2" data-auto-animate-delay="0.1" style="background: lightblue; width: 150px; height: 100px; margin: 10px; border-radius: 200px; font-size: small;"> <div style="padding-top: 25%">Health</div></div>
+						<div data-id="box5" data-auto-animate-delay="0.4" style="background: orange; width: 150px; height: 100px; margin: 10px; border-radius: 200px; font-size: small;"> <div style="padding-top: 25%">Heat Vulnerability</div></div>
+					</div>
+					<p style="margin-top: 20px;">Then we normalized them within their municipalities</p>
+				</section>
+				<section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
+					<div class="r-hstack justify-center">
+						<div data-id="box1" data-auto-animate-delay="0" style="margin: 10px; background: violet; width: 150px; height: 100px;  font-size: small;"> <div style="padding-top: 25%">Age</div></div>
+						<div data-id="box3" data-auto-animate-delay="0.2" style="margin: 10px; background: violet; width: 150px; height: 100px; font-size: small;"> <div style="padding-top: 25%">People of Color</div></div>
+						<div data-id="box4" data-auto-animate-delay="0.3" style="margin: 10px; background: violet; width: 150px; height: 100px; font-size: small;"> <div style="padding-top: 25%">People in Poverty</div></div>
+						<div data-id="box6" data-auto-animate-delay="0.5" style="margin: 10px; background: violet; width: 150px; height: 100px; font-size: small;"> <div style="padding-top: 25%">Employment</div></div>
+						<div data-id="box7" data-auto-animate-delay="0.5" style="margin: 10px; background: violet; width: 150px; height: 100px; font-size: small;"> <div style="padding-top: 25%">Population Density</div></div>
+						<div data-id="box2" data-auto-animate-delay="0.1" style="margin: 10px; background: lightblue; width: 150px; height: 100px; font-size: small;"> <div style="padding-top: 25%">Health</div></div>
+						<div data-id="box5" data-auto-animate-delay="0.4" style="margin: 10px; background: orange; width: 150px; height: 100px; font-size: small;"> <div style="padding-top: 25%">Heat Vulnerability</div></div>
+
+					</div>
+					<p style="margin-top: 20px;">Weighted them equally to create a priority index.</p>
+				</section>
+			</section>
+
+
+				<section>
+				<section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
+					<h2>Tree canopy Gap</h2>
+					<div class="r-hstack justify-center">
+						<div data-id="box1" style="background: yellow; width: 175px; height: 175px; margin: 10px; border-radius: 5px; font-size: l;"> <div style="padding-top: 25%">Canopy Goal</div></div>
+						<div data-id="box2" style="background: violet; width: 175px; height: 175px; margin: 10px; border-radius: 5px; font-size: l;"> <div style="padding-top: 25%">Canopy Cover</div></div>
+					</div>
+					<p>The difference between your tree canopy goal and your current tree canopy</p>
+				</section>
+				<section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
+					<h5>Tree canopy Goal</h5>
+					<div class="r-hstack justify-center">
+						<div data-id="box1" style="background: yellow; width: 175px; height: 175px; margin: 10px; border-radius: 5px; font-size: l; border-radius: 100%;"> <div style="padding-top: 25%">Biome Goal</div></div>
+						<div data-id="box2" style="background: violet; width: 175px; height: 175px; margin: 10px; border-radius: 5px; font-size: l;border-radius: 100%" > <div style="padding-top: 25%">Density</div></div>
+					</div>
+					<p style="margin-top: 20px;">We weighted the biome goal by the population density</p>
+				</section>
+				<section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
+					<h5>Tree canopy cover</h5>
+					<div class="r-hstack justify-center">
+						<div data-id="box2" style="background: red; width: 175px; height: 175px; margin: 10px;  font-size: l; color: white;" > <div style="padding-top: 25%"></div>High Res</div>
+						<div data-id="box1" style="background: midnightblue; width: 175px; height: 175px; margin: 10px;  font-size: l;  color: white;"> <div style="padding-top: 25%">Earth Define</div></div>
+					</div>
+				</section>
+			</section>
+
+
+			<section> 
+				<section >
+					<p>We had to process</p>
+					<h2 class="r-fit-text">2,558 Sattelite Tiles</h2>
+				</section>
+				<section >
+					<p>We had to process</p>
+					<h2 class="r-fit-text">14,586 Census Files</h2>
+				</section>
+				<section >
+					<p>All of this analysis required roughly </p>
+					<h2 class="r-fit-text">25 data sources</h2>
+				</section>
+			</section>
+
+
+			<section> 
+				<section >
+					<h2 class="r-fit-text">Clever Tricks</h2>
+				</section>
+				<section >
+					<h2 class="">Scripting</h2>
+					<p>We wrote a <a target="_blank" href="https://github.com/american-forests/landsat-processing">script</a> that handles the landsat tile scraping and processing to calculate temperature</p>
+					<p>We wrote a GIS data pipeline (basically a massive jupyter notebook) that computes all of the calculations for us.</p>
+				</section>
+				<section>
+					<h2>Speed Boosts</h2> 
+					<ul>
+						<li class="fragment">multi-threading the data downloading process</li>
+						<li class="fragment">multi-processing the temperature tile analysis</li>
+						<li class="fragment">incremental updates (only make updates if new tiles are added)</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Hot Swap Tree Canopy</h2> 
+					<ul>
+						<li class="fragment">If we get a better data source, just by adding it to a folder, our main data pipeline will hot swap the old canopy for new canopy</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Code & Data Stability</h2> 
+					<ul>
+						<li class="fragment">The more assert statements in your code, the more you know about it - <a href="https://matthewbdwyer.github.io/">Professor Matt Dwyer</a></li>
+						<li class="fragment">The more assert statements about your data, the more you know about it - Me</li>
+						<li class="fragment">"mini tests" for data cleaning scripts</li>
+					</ul>
+				</section>
+				</section>
+
+				<section data-background-iframe="https://treeequityscore.org/map/" data-background-interactive>
+					<div style="position: absolute; width: 40%; right: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; font-size: 20px; text-align: left;">
+						<h2 style="color: white">Tree Equity Score Explorer</h2>
+						<p>This work culminated in the creation of <a href="https://treeequityscore.org">treeequityscore.org</a>. We built this application to help folks expore our data and advocate for trees! Read more about it <a href="https://www.nytimes.com/interactive/2021/06/30/opinion/environmental-inequity-trees-critical-infrastructure.html">here</a>.</p>
+					</div>
+				</section>
+			<section> 
+				<section >
+					<h2 class="r-fit-text">Questions</h2>
+				</section>
+			</section>
+			<section> 
+				<section >
+					<h2 class="r-fit-text">Myths</h2>
+				</section>
+				<section >
+					<h2>Thou Must Experience Big Tech</h2>
+					<ul>
+						<li class="fragment">In big tech you build "sky-scrapers"</li>
+						<li class="fragment">Tools like TES are more similar to houses</li>
+						<li class="fragment">Building sky-scrapers do not make you better at building houses</li>
+					</ul>
+				</section>
+				<section >
+					<h2>Thou Must Be an "Expert"</h2>
+					<ul>
+						<li class="fragment">Subject matter experts are very valuable!</li>
+						<li class="fragment">However, not everyone on the team needs to be one</li>
+						<li class="fragment">Don't let fear of not being a domain expert stop you</li>
+					</ul>
+				</section>
+				<section >
+					<h2>Build & Users Will Come</h2>
+					<ul>
+						<li class="fragment">LOL</li>
+						<li class="fragment">Get the word out!</li>
+						<li class="fragment">Offer training sessions (automatic user research)!</li>
+					</ul>
+				</section>
+				<section >
+					<h2>Project Managers are Unnecessary</h2>
+					<ul>
+						<li class="fragment">Project managers are excellent for maintaining project momentum</li>
+						<li class="fragment">Running a good meeting is hard</li>
+						<li class="fragment">Prep is work too</li>
+					</ul>
+				</section>
+				<section >
+					<h2>Thou Needs One More Week</h2>
+					<ul>
+						<li class="fragment">You will always find something to fill that extra time with</li>
+						<ul class="fragment">
+							<li>refactoring, re-designing, new features, documentation</li>
+							</ul>
+					</ul>
+				</section>
+				<section >
+					<h2>Thous Just Needs an Engineer</h2>
+					<ul>
+						<li class="fragment">Most problems/decisions are not engineering problems</li>
+						<li class="fragment">Without the in-house expertise, the great game of telephone begins</li>
+					</ul>
+				</section>
+			</section>
+			<section> 
+				<section >
+					<h2 class="r-fit-text">Obstacles</h2>
+				</section>
+				<section >
+					<h2>Data Quality and Documentation</h2>
+					<ul>
+						<li class="fragment">Most data is not well documented or maintained</li>
+						<ul class="fragment">
+						<li >The US Government's Census Block Group and Block shapefiles are mismatched.</li>
+						</ul>
+						<li class="fragment">Maintaining thorough internal documents is important</li>
+						<li class="fragment">Keep your raw data raw, all data transformations should be written in code</li>
+					</ul>
+				</section>
+				<section >
+					<h2>Key Stone Team Member</h2>
+					<ul>
+						<li class="fragment">If one person is solely responsible for parts of project, it makes documentation difficult</li>
+						<li class="fragment">It makes transitions and updates difficult</li>
+					</ul>
+				</section>
+				<section >
+					<h2>Open Source Stability</h2>
+					<ul>
+						<li class="fragment">A crucial trade off between building your own tools and functions vs using a library</li>
+						<li class="fragment">Specifically, geopandas is still not perfect</li>
+					</ul>
+				</section>
+				<section >
+					<h2>Proprietary Software and Data Formats</h2>
+					<ul>
+						<li class="fragment">ArcGIS is excellent in many ways, but its project scripting and data storage is not particularly portable.</li>
+						<li class="fragment">@geodatabases & @arcpy </li>
+					</ul>
+				</section>
+			</section>
+
+			<section> 
+				<section >
+					<h2 class="r-fit-text">Questions</h2>
+				</section>
+			</section>
+
+			<section>
+				<section>
+					<h2 class="r-fit-text">Next Steps</h2>
+				</section>
+				<section>
+					<h2>We Built on Existing Data Sets</h2>
+					<ul>
+						<li class="fragment">Chespeake Bay Conservancy</li>
+						<li class="fragment">California Urban Tree Canopy Assesment</li>
+						<li class="fragment">The US Census</li>
+					</ul>
+				</section>
+				<section>
+					<h2>We Think You Should Too!</h2>
+					<ul>
+						<li class="fragment"><a target="_blank" href="https://geodata.epa.gov/arcgis/rest/services/OEI/FRS_Wastewater/MapServer">Waste Water Treatment Plants</a></li>
+						<li class="fragment"><a target="_blank" href="https://ofmpub.epa.gov/apex/cimc/f?p=cimc:MAP::::71:P71_WELSEARCH:AZ%7CState%7CAZ%7C%7C%7Ctrue%7Ctrue%7Ctrue%7Ctrue%7Ctrue%7Ctrue%7C%7C-1%7Csites%7CN%7Cbasic">CIMC Data</a></li>
+						<li class="fragment"><a target="_blank" href="https://treeequityscore.org/data/">Tree Equity Score</a></li>
+					</ul>
+				</section>
+				
+			</section>
+
+			<section> 
+				<section >
+					<h2 class="r-fit-text">Credits</h2>
+				</section>
+				<section >
+					<h2>Core Team Members</h2>
+					<ul>
+						<li ><a target="_blank" href="https://www.linkedin.com/in/cgdavid/">Chris David</a> My Boss & VP of GIS & Data Science</li>
+						<li ><a target="_blank" href="https://macwright.com/">Tom MacWright</a> (Software Developer)</li>
+						<li ><a target="_blank" href="https://www.icedcoffeeplease.com/">Iced Coffee Please (Kodi and Erin)</a> (Design Firm)</li>
+						<li ><a target="_blank" href="https://www.linkedin.com/in/rohitmusti">Rohit Musti</a></li>
+					</ul>
+				</section>
+
+
+			</div>
+
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/zoom/zoom.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/search/search.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+
+			// Also available as an ES module, see:
+			// https://revealjs.com/initialization/
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				center: true,
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight ]
+			});
+
+		</script>
+
+	</body>
+</html>
